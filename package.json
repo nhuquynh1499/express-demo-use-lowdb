@@ -1,6 +1,7 @@
 {
-  "name": "2-template-engines",
+  "name": "4-post-method",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +11,5 @@
   "dependencies": {
     "express": "^4.17.1",
     "pug": "^2.0.4"
-  },
-  "devDependencies": {},
-  "description": ""
+  }
 }
