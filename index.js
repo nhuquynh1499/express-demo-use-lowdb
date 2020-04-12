@@ -4,6 +4,7 @@ const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
 const db = low(adapter);
+const shortid = require('shortid');
 const port = 3000;
 
 // Default db.json
@@ -33,9 +34,7 @@ app.get('/users', (req, res) => {
 //Search a user at website: http://localhost:3000/users
 app.get('/users/search', (req, res) => {
   var q = req.query.q;
-  var matchedUsers = db.get('users').filter((user) => {
-    return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-  }).value()
+  var matchedUsers = db.get('users').filter({ name: q}).value()
   res.render('users/index', {
     users: matchedUsers,
     contentSearch: q
@@ -47,8 +46,20 @@ app.get('/users/create', (req, res) => {
   res.render('users/create');
 })
 
+//View a user
+app.get('/users/:id', (req, res) => {
+  var id = req.params.id;
+
+  var user = db.get('users').find({ id: id }).value();
+
+  res.render('users/view', {
+    user: user
+  });
+})
+
 // Add a user at website: http://localhost:3000/users/create and back website: http://localhost:3000/users
 app.post('/users/create', (req, res) => {
+  req.body.id = shortid.generate(); 
   db.get('users').push(req.body).write();
   res.redirect('/users');
 })
