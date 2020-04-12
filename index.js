@@ -14,6 +14,8 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+app.use(express.static('public'));
+
 // Load data from index.pug up website with link: http://localhost:3000/
 app.get('/', (req, res) => {
   res.render('index');
