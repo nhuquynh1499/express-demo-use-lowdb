@@ -35,7 +35,9 @@ module.exports.postLogin = (req, res) => {
     return;
   }
 
-  res.cookie('userId', user.id);
+  res.cookie('userId', user.id, {
+    signed: true
+  });
   // Đúng rùi bạn ơi, may quá.
   res.redirect('/users');
 };
