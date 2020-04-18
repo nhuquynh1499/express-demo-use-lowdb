@@ -9,7 +9,6 @@ module.exports.index = (req, res) => {
 
   var numberOfPages = Math.ceil(db.get('products').value().length / 8);
   var products = db.get('products').value().slice(start, end);
-  console.log(numberOfPages);
   res.render('products/index', {
     //products: db.get('products').drop(start).take(perPage).value();
     products: products,

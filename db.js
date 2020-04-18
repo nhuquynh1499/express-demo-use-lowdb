@@ -4,7 +4,10 @@ const adapter = new FileSync('db.json');
 const db = low(adapter);
 
 // Default db.json
-db.defaults({users: []}).write();
-db.defaults({products: []}).write();
+db.defaults({ 
+    users: [], 
+    products: [],
+    sessions: []
+  }).write();
 
 module.exports = db;

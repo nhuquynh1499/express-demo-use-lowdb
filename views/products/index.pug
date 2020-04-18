@@ -16,8 +16,7 @@ block content
           .card-body
             h5.card-title= product.name
             p.card-text= product.description
-            div
-              button.btn.btn-primary(type= 'button') Add a cart
+            a.btn.btn-primary(href='/cart/add/' + product.id) Add a cart
   
   nav(aria-label='Page navigation example')
     - var page = 1;
