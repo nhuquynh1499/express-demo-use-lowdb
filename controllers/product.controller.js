@@ -1,6 +1,6 @@
 const db = require('../db');
 
-module.exports.index = (req, res) => {
+module.exports.index = (req, res, next) => {
   var page = parseInt(req.query.page) || 1; // n - số thứ tự trang.
   var perPage = 8; // x - số lượng sản phẩm trong 1 trang.
 
@@ -15,4 +15,5 @@ module.exports.index = (req, res) => {
     numberOfPages: numberOfPages
   });
   //console.log(numberOfPages)
+  next(); 
 }

@@ -15,6 +15,9 @@ html
             a.nav-link(href='/users') Users
           li.nav-item
             a.nav-link(href='/products') Products
+          li.nav-item
+            a.nav-link(href='/cart') Cart 
+              span= '(' + numberInCart + ')' 
       
       if user
         p= user.name    

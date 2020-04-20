@@ -2,11 +2,13 @@ require('dotenv').config();
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const csurf = require('csurf');
 
 const userRoute = require('./routes/user.route');
 const authRoute =  require('./routes/auth.route');
 const productRoute = require('./routes/product.route');
 const cartRoute = require('./routes/cart.route');
+const transferRoute = require('./routes/transfer.route');
 
 const authMiddleware = require('./middlewares/auth.middleware');
 const sessionMiddleware = require('./middlewares/session.middleware');
@@ -19,6 +21,7 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser('ajsoweowcn123423'));
 app.use(sessionMiddleware);
+app.use(csurf({ cookie: true }));
 
 // Default pug
 app.set('view engine', 'pug');
@@ -35,6 +38,7 @@ app.use('/users', authMiddleware.requireAuth, userRoute);
 app.use('/auth', authRoute);
 app.use('/products', productRoute);
 app.use('/cart', cartRoute);
+app.use('/transfer', authMiddleware.requireAuth, transferRoute);
 
 app.listen(port, () => {
   console.log('Server listening on port ' + port);
